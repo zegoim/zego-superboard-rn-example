@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useEffect, useRef } from "react";
 
-import { StyleSheet, View, Text, findNodeHandle, Button } from "react-native";
+import { StyleSheet, View, Text, findNodeHandle, Button, Platform } from "react-native";
 // 导入
 import ZegoExpressEngine from "zego-express-engine-whiteboard-reactnative";
 import ZegoSuperBoardManager, {
@@ -585,7 +585,12 @@ export default function App() {
                 type: [DocumentPicker.types.allFiles],
                 mode: "open",
               }).then(async (res) => {
-                const path = decodeURIComponent(res.uri).replace("file://", "");
+                let path =
+                  Platform.OS === "ios"
+                    ? decodeURIComponent(res.uri).replace("file://", "")
+                    : res.uri;
+
+                console.log("path", path);
                 const uploadRes = await superboardManager.uploadFile(
                   path,
                   ZegoSuperBoardRenderType.VectorAndIMG
@@ -605,7 +610,12 @@ export default function App() {
                 type: [DocumentPicker.types.allFiles],
                 mode: "open",
               }).then(async (res) => {
-                const path = decodeURIComponent(res.uri).replace("file://", "");
+                let path =
+                  Platform.OS === "ios"
+                    ? decodeURIComponent(res.uri).replace("file://", "")
+                    : res.uri;
+
+                console.log("path", path);
                 const config = {
                   width: 1600,
                   height: 900,
