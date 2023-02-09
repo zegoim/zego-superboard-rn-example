@@ -437,7 +437,7 @@ export default function App() {
     if (model) {
       const res = await superboardManager
         .getSuperBoardView()
-        .switchExcelSheet(3);
+        .switchSuperBoardSubViewWithSheetIndex(model.uniqueID,3);
       console.log("switchSuperBoardSubViewWithSheetIndex =", res);
     }
   }
