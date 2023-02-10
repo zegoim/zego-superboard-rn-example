@@ -43,22 +43,6 @@ export default function App() {
   const refContainer = useRef(null);
   let currentUniqueId: string;
 
-  const [result, setResult] = React.useState<
-    Array<DocumentPickerResponse> | DirectoryPickerResponse | undefined | null
-  >();
-
-  useEffect(() => {
-    console.log(JSON.stringify(result, null, 2));
-    if (result) {
-      const filePath = result.uri;
-      console.log("result:", filePath);
-      superboardManager.uploadFile(
-        filePath,
-        ZegoSuperBoardRenderType.VectorAndIMG
-      );
-    }
-  }, [result]);
-
   const handleError = (err: unknown) => {
     if (DocumentPicker.isCancel(err)) {
       console.warn("cancelled");
