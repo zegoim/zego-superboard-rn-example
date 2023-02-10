@@ -357,10 +357,6 @@ export default function App() {
     console.log("unInit=", res);
   }
 
-  async function uploadFile(filePath: string, renderType: 3) {
-    await superboardManager.uploadFile(filePath, renderType);
-  }
-
   async function setToolType() {
     await superboardManager.setToolType(ZegoSuperBoardTool.Selector);
     console.log("gettooltype:", await superboardManager.getToolType());
@@ -527,7 +523,6 @@ export default function App() {
         <Button title="createFile" onPress={createFileView} />
         {/* <Button title="switch" onPress={switchSuperBoardSubView} /> */}
         <Button title="switchExcelSheet" onPress={switchExcelSheet} />
-        {/* <Button title="uploadFile" onPress={uploadFile} /> */}
         {/* <Button title="flipToPrePage" onPress={flipToPrePage} />
         <Button title="flipToNextPage" onPress={flipToNextPage} /> */}
         {/* <Button title="uninit" onPress={uninit} /> */}
@@ -575,11 +570,10 @@ export default function App() {
                     : res.uri;
 
                 console.log("path", path);
-                const uploadRes = await superboardManager.uploadFile(
+                await superboardManager.uploadFile(
                   path,
                   ZegoSuperBoardRenderType.VectorAndIMG
                 );
-                console.log("uploadRes", uploadRes);
               });
             } catch (e) {
               handleError(e);
@@ -606,11 +600,10 @@ export default function App() {
                   pageCount: 7,
                   thumbnailList: ["1", "1", "1", "1", "1", "1", "1"],
                 };
-                const uploadRes = await superboardManager.uploadH5File(
+                await superboardManager.uploadH5File(
                   path,
                   config
                 );
-                console.log("uploadRes", uploadRes);
               });
             } catch (e) {
               handleError(e);
